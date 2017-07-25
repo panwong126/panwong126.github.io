@@ -8,7 +8,6 @@
 </head>
 <body>
 
-
 <div id="option">
     <input name="HomeButton" 
            type="button" 
@@ -40,6 +39,25 @@
 
 //  "data": { "url": "https://raw.githubusercontent.com/panwong126/panwong126.github.io/master/data.json"},
 
+var slide_1 = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
+  "data": { "url": "https://raw.githubusercontent.com/panwong126/panwong126.github.io/master/data.json"},
+  "mark": "bar",
+  "encoding": {
+    "x": {
+      "bin": {"maxbins": 10},
+      "field": "shopping_pt",
+      "type": "quantitative",
+	  "axis": {"title": "# of Quotes Before Buying Insurance"}	  
+    },
+    "y": {
+      "aggregate": "count",
+      "type": "quantitative"
+      "axis": {"title": "# of Customers"}
+    }
+  }
+}
+
 var yourVlSpec = {
   "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
   "description": "A bar chart showing the US population distribution of age groups in 2000.",
@@ -48,18 +66,22 @@ var yourVlSpec = {
   "mark": "bar",
   "encoding": {
     "y": {
-      "field": "state", "type": "ordinal",
-      //"scale": {"rangeStep": 17}
+      "field": "shopping_pt", "type": "ordinal",
+	  "axis": {"title": "# of Quotes Before Buying Insurance"}
     },
     "x": {
       "aggregate": "count",  "type": "quantitative",
-      "axis": {"title": "population"}
+      "axis": {"title": "# of Customers"}
     }
   }
 }
 
-function home(){
+function slide1(){
 	vega.embed("#vis", yourVlSpec)
+}
+
+function slide2(){
+	vega.embed("#vis", slide_1)
 }
 	
   </script>
