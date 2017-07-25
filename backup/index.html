@@ -8,30 +8,9 @@
 </head>
 <body>
 
-<div id="option">
-    <input name="StartButton" 
-           type="button" 
-           value="Start" 
-           onclick="start()" />
-    <input name="Slide1Button" 
-           type="button" 
-           value="Slide 1" 
-           onclick="slide1()" />	
-    <input name="Slide2Button" 
-           type="button" 
-           value="Slide 2" 
-           onclick="slide2()" />	
-    <input name="Slide3Button" 
-           type="button" 
-           value="Slide 3" 
-           onclick="slide3()" />
-    <input name="EndButton" 
-           type="button" 
-           value="End" 
-           onclick="Eud()" />		   
-</div>
 
-<p>Hello</p>
+
+
 <div id="vis"></div>
 
  
@@ -42,8 +21,6 @@
 var slide_1 = {
   "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
   "data": { "url": "https://raw.githubusercontent.com/panwong126/panwong126.github.io/master/data.json"},
-   "width":500,
-  "height":500,
   "mark": "bar",
   "encoding": {
     "x": {
@@ -54,18 +31,16 @@ var slide_1 = {
     },
     "y": {
       "aggregate": "count",
-      "type": "quantitative",
+      "type": "quantitative"
       "axis": {"title": "# of Customers"}
     }
   }
 }
 
-var slide_2 = {
+var yourVlSpec = {
   "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
   "description": "A bar chart showing the US population distribution of age groups in 2000.",
   "data": { "url": "https://raw.githubusercontent.com/panwong126/panwong126.github.io/master/data.json"},
-  "width":500,
-  "height":500,
   //"transform": [{"filter": "datum.year == 2000"}],
   "mark": "bar",
   "encoding": {
@@ -80,15 +55,13 @@ var slide_2 = {
   }
 }
 
+vega.embed("#vis", yourVlSpec)
+
+//function slide1(){
+	
+//}
 
 
-function slide1(){
-	vega.embed("#vis", slide_1)
-}
-
-function slide2(){
-	vega.embed("#vis", slide_2)
-}
 	
   </script>
 </body>
