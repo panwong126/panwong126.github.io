@@ -8,10 +8,38 @@
 </head>
 <body>
 
-  <div id="vis"></div>
-//  "data": { "url": "https://raw.githubusercontent.com/panwong126/panwong126.github.io/master/data.json"},
-  
+
+<div id="option">
+    <input name="HomeButton" 
+           type="button" 
+           value="Home" 
+           onclick="home()" />
+    <input name="Slide1Button" 
+           type="button" 
+           value="Slide 1" 
+           onclick="slide1()" />	
+    <input name="Slide2Button" 
+           type="button" 
+           value="Slide 2" 
+           onclick="slide2()" />	
+    <input name="Slide3Button" 
+           type="button" 
+           value="Slide 3" 
+           onclick="slide3()" />
+    <input name="EndButton" 
+           type="button" 
+           value="End of Slides" 
+           onclick="Eud()" />		   
+</div>
+
+
+<div id="vis"></div>
+
+ 
 <script type="text/javascript">
+
+//  "data": { "url": "https://raw.githubusercontent.com/panwong126/panwong126.github.io/master/data.json"},
+
 var yourVlSpec = {
   "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
   "description": "A bar chart showing the US population distribution of age groups in 2000.",
@@ -29,7 +57,11 @@ var yourVlSpec = {
     }
   }
 }
-    vega.embed("#vis", yourVlSpec);
+
+function home(){
+	vega.embed("#vis", yourVlSpec)
+}
+	
   </script>
 </body>
 </html>
