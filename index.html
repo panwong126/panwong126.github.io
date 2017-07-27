@@ -5,6 +5,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vega/3.0.0-rc2/vega.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-lite/2.0.0-beta.10/vega-lite.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-embed/3.0.0-beta.19/vega-embed.js"></script>
+ 
 </head>
 <body>
 
@@ -12,7 +13,7 @@
     <input name="StartButton" 
            type="button" 
            value="Start" 
-           onclick="start()" />
+           onclick="slide0()" />
     <input name="Slide1Button" 
            type="button" 
            value="Slide 1" 
@@ -28,11 +29,14 @@
     <input name="EndButton" 
            type="button" 
            value="End" 
-           onclick="Eud()" />		   
+           onclick="slide4()" />		   
 </div>
 
-<p>Please click the bottons above to navigate through this narrative visualization.</p>
-
+<p>Instructions:</p>
+<p>(1) Please click the bottons above to navigate through this narrative visualization.</p>
+<p>(2) Please hover your mouse over the bars below to get the exact number of customers by category.</p>
+<p>(3) To compare across the histogram bars, please select in the drop-down box under the histogram</p>
+<span id="myspan" style ="color:blue;font-weight:bold; font-size:18pt"> Start Slide - Distribution of Customers by # of Insurance Quotes </span>
 <div id="vis"></div>
  
 <script type="text/javascript">
@@ -42,8 +46,8 @@
 var slide_0 = {
   "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
   "data": { "url": "https://raw.githubusercontent.com/panwong126/panwong126.github.io/master/data.json"},
-  "width":500,
-  "height":500,
+  "width":600,
+  "height":600,
   "mark": "bar",
   "encoding": {
     "x": {
@@ -55,19 +59,20 @@ var slide_0 = {
       "aggregate": "count",
       "type": "quantitative",
       "axis": {"title": "# of Customers"}
-    }
-  }
+    },
+	"tooltip": {"aggregate": "count", "type": "quantitative"}
+  },
 }
 vega.embed("#vis", slide_0)
 
 var slide_1 = {
   "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
   "data": { "url": "https://raw.githubusercontent.com/panwong126/panwong126.github.io/master/data.json"},
-  "width":500,
-  "height":500,
+  "width":600,
+  "height":600,
   "layer":[{
 	"selection": {
-		"org": {
+		"parameter": {
 		"type": "single",
 		"fields": ["car_value"],
 		"bind": {"input": "select", "options":["a","b","c","d","e","f","g","h","i"]}
@@ -79,26 +84,28 @@ var slide_1 = {
     "x": {"field": "shopping_pt", "type": "nominal","axis": {"title": "# of Quotes Before Buying Insurance"}	  },
     "color": {
 	  "value": "grey"
-	}
+	},
+	"tooltip": {"aggregate": "count", "type": "quantitative"}
   }
 },{
-    "transform": [{"filter": {"selection": "org"}}],
+    "transform": [{"filter": {"selection": "parameter"}}],
     "mark": "bar",
     "encoding": {
       "x": {"field": "shopping_pt", "type": "nominal"},
       "y": {"aggregate": "count", "type": "quantitative"},
       "color": {"field": "car_value", "type": "nominal"},
+	  "tooltip": {"aggregate": "count", "type": "quantitative"}
     }
   }]}
 
 var slide_2 = {
   "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
   "data": { "url": "https://raw.githubusercontent.com/panwong126/panwong126.github.io/master/data.json"},
-  "width":500,
-  "height":500,
+  "width":600,
+  "height":600,
   "layer":[{
 	"selection": {
-		"org": {
+		"parameter": {
 		"type": "single",
 		"fields": ["homeowner"],
 		"bind": {"input": "select", "options":[0,1]}
@@ -110,26 +117,28 @@ var slide_2 = {
     "x": {"field": "shopping_pt", "type": "nominal","axis": {"title": "# of Quotes Before Buying Insurance"}	  },
     "color": {
 	  "value": "grey"
-	}
+	},
+	"tooltip": {"aggregate": "count", "type": "quantitative"}
   }
 },{
-    "transform": [{"filter": {"selection": "org"}}],
+    "transform": [{"filter": {"selection": "parameter"}}],
     "mark": "bar",
     "encoding": {
       "x": {"field": "shopping_pt", "type": "nominal"},
       "y": {"aggregate": "count", "type": "quantitative"},
       "color": {"field": "homeowner", "type": "nominal","value": "steelblue"},
+	  "tooltip": {"aggregate": "count", "type": "quantitative"}
     }
   }]}
 
 var slide_3 = {
   "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
   "data": { "url": "https://raw.githubusercontent.com/panwong126/panwong126.github.io/master/data.json"},
-  "width":500,
-  "height":500,
+  "width":600,
+  "height":600,
   "layer":[{
 	"selection": {
-		"org": {
+		"parameter": {
 		"type": "single",
 		"fields": ["married_couple"],
 		"bind": {"input": "select", "options":[0,1]}
@@ -141,33 +150,43 @@ var slide_3 = {
     "x": {"field": "shopping_pt", "type": "nominal","axis": {"title": "# of Quotes Before Buying Insurance"}	  },
     "color": {
 	  "value": "grey"
-	}
+	},
+	"tooltip": {"aggregate": "count", "type": "quantitative"}
   }
 },{
-    "transform": [{"filter": {"selection": "org"}}],
+    "transform": [{"filter": {"selection": "parameter"}}],
     "mark": "bar",
     "encoding": {
       "x": {"field": "shopping_pt", "type": "nominal"},
       "y": {"aggregate": "count", "type": "quantitative"},
       "color": {"field": "married_couple", "type": "nominal","value": "steelblue"},
+	  "tooltip": {"aggregate": "count", "type": "quantitative"}
     }
   }]}
   
-function start(){
+function slide0(){
+	document.getElementById("myspan").innerHTML="Start Slide - Distribution of Customers by # of Insurance Quotes";
 	vega.embed("#vis", slide_0)
 }
   
 function slide1(){
+	document.getElementById("myspan").innerHTML="Slide 1 - Segmenting Customers by Car Value";
 	vega.embed("#vis", slide_1)
 }
 
 function slide2(){
+	document.getElementById("myspan").innerHTML="Slide 2 - Segmenting Customers by Homeownership";
 	vega.embed("#vis", slide_2)
 }
 
 function slide3(){
-
+	document.getElementById("myspan").innerHTML="Slide 3 - Segmenting Customers by Marital Status";
 	vega.embed("#vis", slide_3)
+}
+
+function slide4(){
+	alert("Thanks for watching this narrative visualization. This window will close by itself.");
+	window.close()
 }
 
 
