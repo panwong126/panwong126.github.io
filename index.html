@@ -14,58 +14,78 @@
            type="button" 
            value="About This Visualization" 
            onclick="about()" />
-    <input name="Slide0Button" 
+    <input name="Scene0Button" 
            type="button" 
-           value="Slide 0" 
-           onclick="slide0()" />
-    <input name="Slide1Button" 
+           value="Scene 0" 
+           onclick="Scene0()" />
+    <input name="Scene1Button" 
            type="button" 
-           value="Slide 1" 
-           onclick="slide1()" />	
-    <input name="Slide2Button" 
+           value="Scene 1" 
+           onclick="Scene1()" />	
+    <input name="Scene2Button" 
            type="button" 
-           value="Slide 2" 
-           onclick="slide2()" />	
-    <input name="Slide3Button" 
+           value="Scene 2" 
+           onclick="Scene2()" />	
+    <input name="Scene3Button" 
            type="button" 
-           value="Slide 3" 
-           onclick="slide3()" />		   
+           value="Scene 3" 
+           onclick="Scene3()" />		   
     <input name="EndButton" 
            type="button" 
            value="End" 
-           onclick="slide4()" />		   
+           onclick="Scene4()" />		   
 </div>
 
-<textarea id="textBox1" rows="10" cols="90" style ="border:none">
+<textarea id="textBox1" rows="50" cols="150" style ="border:none">
+INTERACTIVE SLIDESHOW OF INSURANCE CUSTOMERS
+
+DATA & BACKGROUND
+The data set is from Kaggle, an analytics competition website. Basically, the data contain the number of insurance quotes that each of the 97,006 customers obtained before purchasing insurance. Each record contains demographic information about a policy holder at time of insurance purchase such as marital status, home ownership status, and location (e.g., CA). 
+
+HYBRID STRUCTURE 
+For this narrative visualization, I use interactive slideshow to illustrate insurance customers by category (e.g., marital status) and by the number of quotes they get before purchasing insurance. Users could easily navigate the visualization in chronological order (Scene 0 through Scene 3) through clicking the buttons at the top of each webpage, with the contents of the “About this Visualization” button being the first thing users see. By definition of interactive slideshow, users have could investigate each scene further (with the exception of Scene 0, which is an overview), which is discussed in the Parameter section of this write-up. 
+
+SCENES
+As noted in the HYBRID STRUCTURE section, this narrative visualization consists of 4 scenes. All these scenes follow the same template, where the instructions are shown first, followed by a histogram. This layout is appropriate because in this simple visualization about customer distribution, users need guidance to navigate the scenes.  Also, the application and design are appropriate because each scene has only one histogram, which makes it easy for users to focus and analyze. The use of annotation and parameters are also appropriate, and they are discussed in more detail under their respective sections. Here is a brief summary of the scenes.
+
+Scene 0 – Distribution of insurance customers by the number of insurance quotes they obtained
+Scene 1 – Similar to scene 0, further segmenting customers by their car value
+Scene 2 – Similar to scene 1, further segmenting customers by their home ownership status
+Scene 3 – Similar to scene 2, further segmenting customers by their marital status
+
+ANNOTATIONS
+By hovering the mouse over the bars in the histogram, an annotation box would appear to show the number of customers in the bar the mouse points at. The annotation would clear as soon as the mouse has left the bar or users has moved to another scene, and this is appropriate because the mouse no longer points at the data point of interest. To highlight certain data points, colors and bar height are used, because they are more illustrative. I thought about creating a text box to point out the maximum and minimum data points, but they seem redundant. Lastly, all annotations follow the same template to show just the number of customers. 
+
+PARAMETERS
+On Scenes 1 through 3, users have an option to compare the number of customers of specific category, e.g., car value a on scene 1, across x axis using the toggle right under the histogram. This toggle is important because scenes 1 through 3 show stacked histograms, which make comparing the number of certain category of customers across the x-axis not easy. Once a choice has been made in the toggle, the histograms will be updated to show just the customers of the selected type relative to all the members across the x-axis. Please note that a parameter change will never lead to a scene change, because all the scenes have independent parameters. 
+
+TRIGGERS
+The buttons along the top edge are the triggers of this narrative visualization. Each trigger represents a unique scene, and the trigger labels are self-explanatory. The buttons are placed in chronological order from left to right, making it easy to make the users aware of the number and order of events in this narrative visualization.  
+
+As noted in the Parameters section, scenes 1 through 3 have independent parameters. Therefore, moving from scene 1 to either scene 2 or 3 would only change the set of parameters of interest, NOT the selected parameter itself. 
+
+</textarea>
+
+
+<textarea id="textBox2" rows="10" cols="90" style ="border:none;display:none">
 Instructions:
 
 (1) Please click the buttons above to navigate through this narrative visualization.
 
 (2) Please hover your mouse over the bars below to get the exact number of customers by category.
 
-(3) To compare across the histogram bars, please select in the drop-down box under the histogram. 
+(3) To compare across the histogram bars, please select in the drop-down box under the histogram.
 </textarea>
-
-<div id="list">
-  <p><iframe src="https://panwong126.github.io/test1.html" frameborder="0" height="400"
-      width="95%"></iframe></p>
-</div>
-
-
-
-
 
 <p id="myspan" style ="color:blue;font-weight:bold; font-size:18pt"> </p>
 <div id="vis"></div>
  
 <script type="text/javascript">
 
-//  "data": { "url": "https://raw.githubusercontent.com/panwong126/panwong126.github.io/master/data.json"},
-
-var slide_0 = {
+var Scene_0 = {
   "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
   "data": { "url": "https://raw.githubusercontent.com/panwong126/panwong126.github.io/master/data.json"},
-  "width":600,
+  "width":500,
   "height":600,
   "mark": "bar",
   "encoding": {
@@ -84,10 +104,10 @@ var slide_0 = {
 }
 
 
-var slide_1 = {
+var Scene_1 = {
   "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
   "data": { "url": "https://raw.githubusercontent.com/panwong126/panwong126.github.io/master/data.json"},
-  "width":600,
+  "width":500,
   "height":600,
   "layer":[{
 	"selection": {
@@ -117,10 +137,10 @@ var slide_1 = {
     }
   }]}
 
-var slide_2 = {
+var Scene_2 = {
   "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
   "data": { "url": "https://raw.githubusercontent.com/panwong126/panwong126.github.io/master/data.json"},
-  "width":600,
+  "width":500,
   "height":600,
   "layer":[{
 	"selection": {
@@ -150,10 +170,10 @@ var slide_2 = {
     }
   }]}
 
-var slide_3 = {
+var Scene_3 = {
   "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
   "data": { "url": "https://raw.githubusercontent.com/panwong126/panwong126.github.io/master/data.json"},
-  "width":600,
+  "width":500,
   "height":600,
   "layer":[{
 	"selection": {
@@ -184,59 +204,56 @@ var slide_3 = {
   }]}
 
 function about(){
-
+	document.getElementById("textBox1").style.display = "block"
+	document.getElementById("textBox2").style.display = "none"
+	document.getElementById("myspan").style.display = "none"
+	document.getElementById("vis").style.display = "none"
 }
   
-function slide0(){
-	document.getElementById("myspan").innerHTML="Slide 0 - Distribution of Customers by # of Insurance Quotes";
-	vega.embed("#vis", slide_0);
-	document.getElementById("textBox1").cols = "200";
+function Scene0(){
+	document.getElementById("textBox1").style.display = "none"
+	document.getElementById("textBox2").style.display = "block"
+	document.getElementById("myspan").innerHTML="Scene 0 - Distribution of Customers by # of Insurance Quotes";
+	vega.embed("#vis", Scene_0);
+	document.getElementById("vis").style.display = "block"
+	document.getElementById("myspan").style.display = "block"
 }
   
-function slide1(){
-	document.getElementById("myspan").innerHTML="Slide 1 - Segmenting Customers by Car Value";
-	vega.embed("#vis", slide_1)
+function Scene1(){
+	document.getElementById("textBox1").style.display = "none"
+	document.getElementById("textBox2").style.display = "block"
+	document.getElementById("myspan").innerHTML="Scene 1 - Segmenting Customers by Car Value";
+	vega.embed("#vis", Scene_1)
+	document.getElementById("vis").style.display = "block"	
+	document.getElementById("myspan").style.display = "block"	
 }
 
-function slide2(){
-	document.getElementById("myspan").innerHTML="Slide 2 - Segmenting Customers by Homeownership";
-	vega.embed("#vis", slide_2)
+function Scene2(){
+	document.getElementById("textBox1").style.display = "none"
+	document.getElementById("textBox2").style.display = "block"
+	document.getElementById("myspan").innerHTML="Scene 2 - Segmenting Customers by Homeownership";
+	vega.embed("#vis", Scene_2)
+	document.getElementById("vis").style.display = "block"
+	document.getElementById("myspan").style.display = "block"	
 }
 
-function slide3(){
-	document.getElementById("myspan").innerHTML="Slide 3 - Segmenting Customers by Marital Status";
-	vega.embed("#vis", slide_3)
+function Scene3(){
+	document.getElementById("textBox1").style.display = "none"
+	document.getElementById("textBox2").style.display = "block"
+	document.getElementById("myspan").innerHTML="Scene 3 - Segmenting Customers by Marital Status";
+	vega.embed("#vis", Scene_3)
+	document.getElementById("vis").style.display = "block"	
+	document.getElementById("myspan").style.display = "block"	
 }
 
-function slide4(){
+function Scene4(){
+	document.getElementById("textBox1").style.display = "none"
+	document.getElementById("textBox2").style.display = "none"
+	document.getElementById("myspan").style.display = "none"
+	document.getElementById("vis").style.display = "none"
 	alert("Thanks for watching this narrative visualization.")
 }
 
-function load1() {
-    var file = new XMLHttpRequest();
-    file.open("GET", "http://remote.tld/random.txt", true);
-    file.onreadystatechange = function() {
-      if (file.readyState === 4) {  // Makes sure the document is ready to parse
-        if (file.status === 200) {  // Makes sure it's found the file
-          text = file.responseText;
-          document.getElementById("div1").innerHTML = text;
-        }
-      }
-    }
-}
-
-function load2() {
-    var file = new XMLHttpRequest();
-    file.open("GET", "http://remote.tld/random.txt", true);
-    file.onreadystatechange = function() {
-      if (file.readyState === 4) {  // Makes sure the document is ready to parse
-        if (file.status === 200) {  // Makes sure it's found the file
-          text = file.responseText;
-          document.getElementById("div1").innerHTML = text;
-        }
-      }
-    }
-}
 
 	
   </script>

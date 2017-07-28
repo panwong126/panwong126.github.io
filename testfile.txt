@@ -1,7 +1,0 @@
-Instructions:
-
-(1) Please click the buttons above to navigate through this narrative visualization.
-
-(2) Please hover your mouse over the bars below to get the exact number of customers by category.
-
-(3) To compare across the histogram bars, please select in the drop-down box under the histogram. 
