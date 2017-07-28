@@ -10,9 +10,13 @@
 <body>
 
 <div id="option">
-    <input name="StartButton" 
+    <input name="About" 
            type="button" 
-           value="Start" 
+           value="About This Visualization" 
+           onclick="about()" />
+    <input name="Slide0Button" 
+           type="button" 
+           value="Slide 0" 
            onclick="slide0()" />
     <input name="Slide1Button" 
            type="button" 
@@ -32,11 +36,21 @@
            onclick="slide4()" />		   
 </div>
 
-<p>Instructions:</p>
-<p>(1) Please click the bottons above to navigate through this narrative visualization.</p>
-<p>(2) Please hover your mouse over the bars below to get the exact number of customers by category.</p>
-<p>(3) To compare across the histogram bars, please select in the drop-down box under the histogram.</p>
-<span id="myspan" style ="color:blue;font-weight:bold; font-size:18pt"> Start Slide - Distribution of Customers by # of Insurance Quotes </span>
+<textarea id="textBox1" rows="10" cols="90" style ="border:none">
+Instructions:
+
+(1) Please click the buttons above to navigate through this narrative visualization.
+
+(2) Please hover your mouse over the bars below to get the exact number of customers by category.
+
+(3) To compare across the histogram bars, please select in the drop-down box under the histogram. 
+</textarea>
+
+<?php
+include 'testfile.txt';
+?> 
+
+<p id="myspan" style ="color:blue;font-weight:bold; font-size:18pt"> </p>
 <div id="vis"></div>
  
 <script type="text/javascript">
@@ -63,7 +77,7 @@ var slide_0 = {
 	"tooltip": {"aggregate": "count", "type": "quantitative"}
   },
 }
-vega.embed("#vis", slide_0)
+
 
 var slide_1 = {
   "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
@@ -163,10 +177,15 @@ var slide_3 = {
 	  "tooltip": {"aggregate": "count", "type": "quantitative"}
     }
   }]}
+
+function about(){
+
+}
   
 function slide0(){
-	document.getElementById("myspan").innerHTML="Start Slide - Distribution of Customers by # of Insurance Quotes";
-	vega.embed("#vis", slide_0)
+	document.getElementById("myspan").innerHTML="Slide 0 - Distribution of Customers by # of Insurance Quotes";
+	vega.embed("#vis", slide_0);
+	document.getElementById("textBox1").cols = "200";
 }
   
 function slide1(){
@@ -188,6 +207,31 @@ function slide4(){
 	alert("Thanks for watching this narrative visualization.")
 }
 
+function load1() {
+    var file = new XMLHttpRequest();
+    file.open("GET", "http://remote.tld/random.txt", true);
+    file.onreadystatechange = function() {
+      if (file.readyState === 4) {  // Makes sure the document is ready to parse
+        if (file.status === 200) {  // Makes sure it's found the file
+          text = file.responseText;
+          document.getElementById("div1").innerHTML = text;
+        }
+      }
+    }
+}
+
+function load2() {
+    var file = new XMLHttpRequest();
+    file.open("GET", "http://remote.tld/random.txt", true);
+    file.onreadystatechange = function() {
+      if (file.readyState === 4) {  // Makes sure the document is ready to parse
+        if (file.status === 200) {  // Makes sure it's found the file
+          text = file.responseText;
+          document.getElementById("div1").innerHTML = text;
+        }
+      }
+    }
+}
 
 	
   </script>
